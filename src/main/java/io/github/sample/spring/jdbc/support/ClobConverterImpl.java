@@ -31,7 +31,7 @@ public class ClobConverterImpl implements ClobConverter {
 		}
 	}
 
-	@Transactional // use this to force a transaction context otherwise a exception will be raised
+	@Transactional // use this to force a transaction context otherwise an exception will be raised
 	public Clob create(String string) {
 		if (string == null) {
 			return null;
