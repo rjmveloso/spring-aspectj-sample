@@ -1,7 +1,7 @@
 package io.github.sample.spring.aop;
 
 import io.github.sample.spring.jdbc.support.ClobConverterAware;
-import io.github.sample.spring.jdbc.support.ClobConverterImpl;
+import io.github.sample.spring.jdbc.support.HibernateClobConverter;
 
 /**
  * @author rveloso
@@ -18,7 +18,7 @@ public aspect ClobConvertableAspect {
 		//initialization(ClobConverterAware+.new(..)) && this(bean);
 
 	after(ClobConverterAware bean) returning : construction(bean) {
-		bean.setClobConverter(new ClobConverterImpl());
+		bean.setClobConverter(new HibernateClobConverter());
 	}
 
 }

@@ -6,8 +6,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
-		<aspectj.version>1.9.4</aspectj.version>
-		<spring.version>4.3.24.RELEASE</spring.version>
+		<aspectj.version>1.9.7</aspectj.version>
+		<spring.version>5.3.15</spring.version>
 		<hibernate.version>5.4.24.Final</hibernate.version>
 
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -88,7 +88,7 @@
 							<basedir>src/main/java</basedir>
 							<includes>
 								<include>**/aop/ClobConvertableAspect.aj</include>
-								<include>**/domain/ClobEntity.java</include>
+								<include>**/domain/OrderEntity.java</include>
 							</includes>
 						</source>
 					</sources>

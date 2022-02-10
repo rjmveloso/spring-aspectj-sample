@@ -3,20 +3,24 @@ package io.github.sample.spring.jdbc.support;
 import java.sql.Clob;
 import java.sql.SQLException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.engine.jdbc.LobCreator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * This class can be used if SessionFactory is available for injection
+ * 
+ * @author rveloso
+ *
+ */
 @Configurable
-public class ClobConverterImpl implements ClobConverter {
+public class HibernateClobConverter2 implements ClobConverter {
 
-	@PersistenceContext
-	private EntityManager emanager;
+	@Autowired
+	private SessionFactory sfactory;
 
 	public String read(Clob clob) {
 		if (clob == null) {
@@ -31,15 +35,14 @@ public class ClobConverterImpl implements ClobConverter {
 		}
 	}
 
-	@Transactional // use this to force a transaction context otherwise an exception will be raised
 	public Clob create(String string) {
 		if (string == null) {
 			return null;
 		}
 
-		Session session = emanager.unwrap(Session.class);
+		Session session = sfactory.getCurrentSession();
 		LobCreator lcreator = Hibernate.getLobCreator(session);
-		//LobHelper lcreator = session.getLobHelper();
 		return lcreator.createClob(string);
 	}
+
 }
